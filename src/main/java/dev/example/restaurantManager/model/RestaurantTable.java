@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Table {
+public class RestaurantTable {
 
     private String name;
     private String description;

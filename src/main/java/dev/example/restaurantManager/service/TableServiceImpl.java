@@ -1,33 +1,34 @@
 package dev.example.restaurantManager.service;
 
-import dev.example.restaurantManager.model.Table;
+import dev.example.restaurantManager.model.RestaurantTable;
 import dev.example.restaurantManager.repository.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TableServiceImpl implements TableService {
 
     @Autowired
     private TableRepository tableRepository;
     @Override
-    public List<Table> getAllTables(){return tableRepository.findAll();}
+    public List<RestaurantTable> getAllTables(){return tableRepository.findAll();}
     @Override
-    public Table createTable(Table table){
+    public RestaurantTable createTable(RestaurantTable table){
         if(table.getName() == null || table.getName().isEmpty()){
             table.setName("Default Table name");
         }
         return tableRepository.save(table);
     }
     @Override
-    public Table getTableByName(String name) {
+    public RestaurantTable getTableByName(String name) {
         return tableRepository.findByName(name).orElse(null);
 
     }
     @Override
-    public Table updateTable(String name, Table tableDetails){
-        Table table = tableRepository.findByName(name).orElse(null);
+    public RestaurantTable updateTable(String name, RestaurantTable tableDetails){
+        RestaurantTable table = tableRepository.findByName(name).orElse(null);
         if (table == null){
             return null;
         }
@@ -51,7 +52,7 @@ public class TableServiceImpl implements TableService {
     @Override
     public boolean deleteTable (String name){
 
-        Table table = tableRepository.findByName(name).orElse(null);
+        RestaurantTable table = tableRepository.findByName(name).orElse(null);
         if(table == null){
             return false;
         }
