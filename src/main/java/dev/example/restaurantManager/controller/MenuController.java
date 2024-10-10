@@ -21,15 +21,17 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
+    //Get all menus
     @GetMapping("/allMenus")
     public ResponseEntity<List<Menu>> getAllMenus(){
         List<Menu> menus = menuService.getAllMenus();
         HttpHeaders headers1 = getCommonHeaders("get all menus");
         return menus !=null && !menus.isEmpty()
                 ? new ResponseEntity<>(menus, headers1, HttpStatus.OK)
-                : new ResponseEntity<>(headers1, HttpStatus.NOT_FOUND);
+                : new ResponseEntity<>(headers1, HttpStatus.NO_CONTENT);
     }
 
+    //Create a new menu
     @PostMapping
     public ResponseEntity<Menu> createMenu(@RequestBody Menu menu) {
         Menu createdMenu = menuService.createMenu(menu);
@@ -40,6 +42,7 @@ public class MenuController {
                 : new ResponseEntity<>(headers1,HttpStatus.BAD_REQUEST);
     }
 
+    //Update a menu by ID
     @PutMapping("{id}")
     public ResponseEntity<Menu> updateMenu(@PathVariable String id, @RequestBody Menu menuDetails){
         Menu updatedMenu = menuService.updateMenu(id, menuDetails);
@@ -51,7 +54,7 @@ public class MenuController {
                 : new ResponseEntity<>(headers,HttpStatus.NOT_FOUND);
 
     }
-
+    //Delete a menu by ID
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteMenu(@PathVariable String id){
         boolean deleted = menuService.deleteMenu(id);
@@ -63,7 +66,7 @@ public class MenuController {
 
 
     }
-
+    //Get a menu by ID
     @GetMapping("/{id}")
     public ResponseEntity<Menu> getMenuById(@PathVariable String id) {
         Menu menu   = menuService.getMenuById(id);
@@ -74,7 +77,7 @@ public class MenuController {
                 : new ResponseEntity<>(headers, HttpStatus.NOT_FOUND);
     }
 
-
+    //method to create commonheaders
     private HttpHeaders getCommonHeaders(String description) {
         HttpHeaders headers1 = new HttpHeaders();
         headers1.add("desc", description);

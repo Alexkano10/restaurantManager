@@ -27,7 +27,7 @@ public class TableDataLoader {
                 RestaurantTable table = new RestaurantTable();
 
                 // Using Faker to generate fake data
-                table.setName(faker.company().name());
+                table.setName("Table " + (i + 1));
                 table.setDescription(faker.lorem().sentence());
                 table.setQty(faker.number().numberBetween(1, 10));
                 table.setBusy(faker.bool().bool());  //

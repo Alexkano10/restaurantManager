@@ -19,6 +19,7 @@ public class TableController {
     @Autowired
     private TableService tableService;
 
+    //Get all restaurant tables
     @GetMapping("/allTables")
     public ResponseEntity<List<RestaurantTable>>getAllTables(){
         List<RestaurantTable> tables = tableService.getAllTables();
@@ -28,6 +29,7 @@ public class TableController {
                 : new ResponseEntity<>(headers, HttpStatus.NOT_FOUND);
     }
 
+    //create a new table
     @PostMapping
     public ResponseEntity<RestaurantTable> createTable(@RequestBody RestaurantTable table){
         RestaurantTable createdTable = tableService.createTable(table);
@@ -38,7 +40,7 @@ public class TableController {
                 : new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 
     }
-
+    //Update an existing restaurant table by name
     @PutMapping("/{name}")
     public ResponseEntity<RestaurantTable> updateTable(@PathVariable String name, @RequestBody RestaurantTable tableDetails) {
         RestaurantTable updatedTable = tableService.updateTable(name, tableDetails);
@@ -48,7 +50,7 @@ public class TableController {
                 : new ResponseEntity<>(headers,HttpStatus.NOT_FOUND);
     }
 
-    // Eliminar una mesa
+    // Delete a restaurant table by name
     @DeleteMapping("/{name}")
     public ResponseEntity<Void> deleteTable(@PathVariable String name) {
         boolean deleted = tableService.deleteTable(name);
@@ -58,6 +60,7 @@ public class TableController {
                 : new ResponseEntity<>(headers, HttpStatus.NOT_FOUND);
     }
 
+    // Get a table by name
     @GetMapping("/{name}")
     public ResponseEntity<RestaurantTable> getTableByName(@PathVariable String name){
         RestaurantTable table = tableService.getTableByName(name);
