@@ -60,6 +60,9 @@ public class TableServiceImpl implements TableService {
         return true;
     }
 
+    @Override
+    public long countTables(){return tableRepository.count();}
+
 
 }
 

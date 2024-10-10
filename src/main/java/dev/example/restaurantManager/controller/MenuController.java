@@ -1,6 +1,7 @@
 package dev.example.restaurantManager.controller;
 
 
+import dev.example.restaurantManager.model.Customer;
 import dev.example.restaurantManager.model.Menu;
 import dev.example.restaurantManager.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,39 @@ public class MenuController {
                 : new ResponseEntity<>(headers1,HttpStatus.BAD_REQUEST);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Menu> updateMenu(@PathVariable String id, @RequestBody Menu menuDetails){
+        Menu updatedMenu = menuService.updateMenu(id, menuDetails);
+        HttpHeaders headers = getCommonHeaders("Update menu");
 
+
+        return updatedMenu !=null
+                ? new ResponseEntity<>(updatedMenu,headers,HttpStatus.OK)
+                : new ResponseEntity<>(headers,HttpStatus.NOT_FOUND);
+
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteMenu(@PathVariable String id){
+        boolean deleted = menuService.deleteMenu(id);
+        HttpHeaders headers = getCommonHeaders("Delete a Menu");
+        headers.add("deleted", String.valueOf(deleted));
+        return deleted
+                ? new ResponseEntity<>(headers, HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(headers, HttpStatus.NOT_FOUND);
+
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Menu> getMenuById(@PathVariable String id) {
+        Menu menu   = menuService.getMenuById(id);
+        HttpHeaders headers = getCommonHeaders("Get a Menu by Id");
+
+        return menu != null
+                ? new ResponseEntity<>(menu, headers, HttpStatus.OK)
+                : new ResponseEntity<>(headers, HttpStatus.NOT_FOUND);
+    }
 
 
     private HttpHeaders getCommonHeaders(String description) {
