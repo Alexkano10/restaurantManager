@@ -58,7 +58,7 @@ public class TableController {
                 : new ResponseEntity<>(headers, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{name}")
     public ResponseEntity<RestaurantTable> getTableByName(@PathVariable String name){
         RestaurantTable table = tableService.getTableByName(name);
         HttpHeaders headers = getCommonHeaders("Get a table by name");
