@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class TableRestaurant {
+public class RestaurantTable {
 
     @Id
     private String id;
@@ -28,7 +28,7 @@ public class TableRestaurant {
 
 
     // we must create a VERY CONCRETE constructor to RUN the OLD tests
-    public TableRestaurant(String name, String description , int qty,  boolean busy) {
+    public RestaurantTable(String name, String description , int qty, boolean busy) {
     }
 
 
