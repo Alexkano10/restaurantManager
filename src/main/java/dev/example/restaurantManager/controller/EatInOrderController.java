@@ -80,7 +80,7 @@ public class EatInOrderController {
         headers.add("date", new Date().toString());
         headers.add("server", "H2 Database");
         headers.add("version", "1.0.0");
-        headers.add("customer-count",String.valueOf(eatInService.countEatInOrders()));
+        headers.add("eatInOrders-count",String.valueOf(eatInService.countEatInOrders()));
         headers.add("object", "EatInOrders");
         return headers;
     }

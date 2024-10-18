@@ -10,26 +10,29 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class EatInServiceImpl {
+public class EatInServiceImpl implements EatInService {
 
     @Autowired
     private EatInRepository eatInRepository;
 
+    @Override
     public List<EatInOrderRestaurant> getAllEatInOrders(){
         return eatInRepository.findAll();
     }
-
+    @Override
     public EatInOrderRestaurant createEatInOrders(EatInOrderRestaurant EatInOrderRestaurant){
         EatInOrderRestaurant.setId(UUID.randomUUID().toString());
         return eatInRepository.save(EatInOrderRestaurant);
     }
 
-    EatInOrderRestaurant getEatInOrdersById(String id){
+    @Override
+    public EatInOrderRestaurant getEatInOrdersById(String id){
 
         return eatInRepository.findById(id).orElse(null);
 
     }
-    public EatInOrderRestaurant updateEatInOrder(String id, EatInOrderRestaurant eatInOrderDetails) {
+    @Override
+    public EatInOrderRestaurant updateEatInOrders(String id, EatInOrderRestaurant eatInOrderDetails) {
         Optional<EatInOrderRestaurant> optionalOrder = eatInRepository.findById(id);
         if (optionalOrder.isPresent()) {
             EatInOrderRestaurant existingOrder = optionalOrder.get();
@@ -43,16 +46,18 @@ public class EatInServiceImpl {
             return eatInRepository.save(existingOrder);
         }
         return null; // si no hay orden
-    }
 
-    boolean deleteEatInOrders(String id){
+    }
+    @Override
+    public boolean deleteEatInOrders(String id){
         eatInRepository.deleteById(id);
         Optional<EatInOrderRestaurant> eatInOrderRestaurant = eatInRepository.findById(id);
         return eatInOrderRestaurant.isEmpty()
                 ? false
                 : true;
     }
-    long countEatInOrders(){
+    @Override
+    public long countEatInOrders(){
         return eatInRepository.count();
     }
 
