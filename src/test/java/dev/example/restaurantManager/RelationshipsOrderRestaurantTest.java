@@ -41,8 +41,8 @@ private CustomerRepository customerRepository;
             Customer customer9 = new Customer("C9", "George", "george@email.com", "901-234-5678", 50, false, false);
 
             // Create sample tables
-            TableRestaurant table1 = new TableRestaurant("T1", "Window Table", 4, false);
-            TableRestaurant table2 = new TableRestaurant("T2", "Corner Table", 2, true);
+            RestaurantTable table1 = new RestaurantTable("T1", "Window Table", 4, false);
+            RestaurantTable table2 = new RestaurantTable("T2", "Corner Table", 2, true);
 
             // Create 3 ShippingOrder objects
             OrderRestaurant shippingOrder1 = new ShippingOrderRestaurant("SO1", new Date(), "John", 2, 21.98, false, new ArrayList<>(Arrays.asList(menuRestaurant1, menuRestaurant1)), "123 Main St", "New York", "Mike");

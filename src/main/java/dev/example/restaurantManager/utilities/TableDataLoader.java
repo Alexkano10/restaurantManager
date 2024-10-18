@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Locale;
+import java.util.UUID;
 
 @Component
 public class TableDataLoader {
@@ -27,6 +28,7 @@ public class TableDataLoader {
                 RestaurantTable table = new RestaurantTable();
 
                 // Using Faker to generate fake data
+                table.setId(UUID.randomUUID().toString());
                 table.setName("Table " + (i + 1));
                 table.setDescription(faker.lorem().sentence());
                 table.setQty(faker.number().numberBetween(1, 10));

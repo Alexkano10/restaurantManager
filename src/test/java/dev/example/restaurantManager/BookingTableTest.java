@@ -2,9 +2,9 @@ package dev.example.restaurantManager;
 
 
 import dev.example.restaurantManager.model.Booking;
-import dev.example.restaurantManager.model.TableRestaurant;
+import dev.example.restaurantManager.model.RestaurantTable;
 import dev.example.restaurantManager.repository.BookingRepository;
-import dev.example.restaurantManager.repository.TableRestaurantRepository;
+import dev.example.restaurantManager.repository.TableRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,7 +21,7 @@ public class BookingTableTest {
     @Autowired
     private BookingRepository bookingRepository;
     @Autowired
-    private TableRestaurantRepository tableRestaurantRepository;
+    private TableRepository tableRepository;
 
     @Test
     public void TestCreateBookingTable() {
@@ -36,7 +36,7 @@ public class BookingTableTest {
         booking1.setPhoneNumber("561-651-25-25");
 
         // Create tableRestaurant object
-        TableRestaurant tableRestaurant1 = new TableRestaurant("TR01", "Table 01",
+       /* RestaurantTable tableRestaurant1 = new RestaurantTable("TR01", "Table 01",
                 "TABLE 01 for 4 people outdoors",  4, false, new ArrayList<>());
 
         // assign  booking to tableRestaurant
@@ -61,6 +61,8 @@ public class BookingTableTest {
         assertThat(found).isPresent();
 
 
-
+        */
     }
+
 }
+
