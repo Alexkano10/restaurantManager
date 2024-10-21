@@ -46,10 +46,22 @@ public class MenuRestaurant  {
                 ", content='" + content + '\'' +
                 ", active=" + active +
                 ", water=" + water +
+                '}';
+    }
+
+    /*@Override
+    public String toString() {
+        return "MenuRestaurant{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", content='" + content + '\'' +
+                ", active=" + active +
+                ", water=" + water +
                 ", ordersCount=" + (orders != null ? orders.size() : 0) +
                 ", orders=" + orders +
                 '}';
-    }
+    }*/
 
 }
 
