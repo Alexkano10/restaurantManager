@@ -15,9 +15,7 @@ import java.util.Date;
 @Entity
 public class EatInOrderRestaurant extends OrderRestaurant {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) // Generate ID automatically
-    private String id;
+
     //Relation with RestaurantTable Many to One
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TABLE_EATIN_FK_ID")

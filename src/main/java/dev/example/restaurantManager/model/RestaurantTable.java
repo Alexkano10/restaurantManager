@@ -28,6 +28,18 @@ public class RestaurantTable {
     @OneToMany(mappedBy = "orderedTableRestaurant", cascade = CascadeType.ALL)
     private ArrayList<EatInOrderRestaurant> eatInOrders;
 
+    //Constructor with eatinorders
+
+    public RestaurantTable(String id, String name, String description, int qty, boolean busy, ArrayList<EatInOrderRestaurant> eatInOrders) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.qty = qty;
+        this.busy = busy;
+        this.eatInOrders = eatInOrders;
+    }
+
+
     // we must create a VERY CONCRETE constructor to RUN the OLD tests
     public RestaurantTable(String name, String description , int qty, boolean busy) {
         this.name = name;
@@ -35,6 +47,18 @@ public class RestaurantTable {
         this.qty = qty;
         this.busy = busy;
     }
+
+    // Méthod tu add orders
+
+    public void addEatInOrder(EatInOrderRestaurant order) {
+        this.getEatInOrders().add(order); // Agregar la orden a la lista de órdenes
+        if (order.getOrderedTableRestaurant() != null) {
+            order.getOrderedTableRestaurant().getEatInOrders().remove(order); // Eliminar de la relación inversa si ya está asignada
+        }
+        order.setOrderedTableRestaurant(this); // Establecer la mesa como la mesa ordenada en la orden
+    }
+
+
 
 
     //method to add bookings

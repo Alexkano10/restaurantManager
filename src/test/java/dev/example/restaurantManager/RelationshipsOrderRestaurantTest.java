@@ -50,9 +50,9 @@ private CustomerRepository customerRepository;
             OrderRestaurant shippingOrder3 = new ShippingOrderRestaurant("SO3", new Date(), "Emily", 3, 32.97, false, new ArrayList<>(Arrays.asList(menuRestaurant1, menuRestaurant2, menu3)), "789 Oak St", "Chicago", "Lisa");
 
             // Create 3 EatInOrder objects
-            OrderRestaurant eatInOrder1 = new EatInOrderRestaurant("EO1", new Date(), "David", 4, 43.96, true, new ArrayList<>(Arrays.asList(menuRestaurant1, menuRestaurant1, menuRestaurant2, menuRestaurant2)), new ArrayList<>(Arrays.asList(table1)));
-            OrderRestaurant eatInOrder2 = new EatInOrderRestaurant("EO2", new Date(), "Anna", 2, 21.98, false, new ArrayList<>(Arrays.asList(menuRestaurant2, menu3)), new ArrayList<>(Arrays.asList(table2)));
-            OrderRestaurant eatInOrder3 = new EatInOrderRestaurant("EO3", new Date(), "Mark", 6, 65.94, true, new ArrayList<>(Arrays.asList(menuRestaurant1, menuRestaurant1, menuRestaurant2, menuRestaurant2, menu3, menu3)), new ArrayList<>(Arrays.asList(table1, table2)));
+            //OrderRestaurant eatInOrder1 = new EatInOrderRestaurant("EO1", new Date(), "David", 4, 43.96, true, new ArrayList<>(Arrays.asList(menuRestaurant1, menuRestaurant1, menuRestaurant2, menuRestaurant2)), new ArrayList<>(Arrays.asList(table1)));
+            //OrderRestaurant eatInOrder2 = new EatInOrderRestaurant("EO2", new Date(), "Anna", 2, 21.98, false, new ArrayList<>(Arrays.asList(menuRestaurant2, menu3)), new ArrayList<>(Arrays.asList(table2)));
+            //OrderRestaurant eatInOrder3 = new EatInOrderRestaurant("EO3", new Date(), "Mark", 6, 65.94, true, new ArrayList<>(Arrays.asList(menuRestaurant1, menuRestaurant1, menuRestaurant2, menuRestaurant2, menu3, menu3)), new ArrayList<>(Arrays.asList(table1, table2)));
 
             // Create 3 TakeAwayOrder objects
             OrderRestaurant takeAwayOrder1 = new TakeAwayOrder("TO1", new Date(), "Alice", 1, 10.99, true, new ArrayList<>(Arrays.asList(menuRestaurant1)), customer1 );
@@ -63,7 +63,7 @@ private CustomerRepository customerRepository;
             // Create a list of all orders
             ArrayList<OrderRestaurant> orders = new ArrayList<>();
             orders.addAll(Arrays.asList(shippingOrder1, shippingOrder2, shippingOrder3,
-                    eatInOrder1, eatInOrder2, eatInOrder3,
+         //           eatInOrder1, eatInOrder2, eatInOrder3,
                     takeAwayOrder1, takeAwayOrder2, takeAwayOrder3, takeAwayOrder4));
 
             // Print the number of orders
