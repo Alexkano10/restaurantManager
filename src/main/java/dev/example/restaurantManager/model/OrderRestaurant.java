@@ -3,12 +3,13 @@ package dev.example.restaurantManager.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -24,11 +25,12 @@ public class OrderRestaurant {
     private double totalPayment;
     private boolean paid;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "order_menu",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "menu_id")
+            name = "ORDER_MENU",
+            joinColumns = @JoinColumn(name = "ORDER_ID_FK"),
+            inverseJoinColumns = @JoinColumn(name = "MENU_ID_FK")
     )
     private List<MenuRestaurant> menus = new ArrayList<>();
 
@@ -60,7 +62,7 @@ public class OrderRestaurant {
                 ", totalPayment=" + totalPayment +
                 ", paid=" + paid +
                 ", menusCount=" + (menus != null ? menus.size() : 0) +
-                ", menus=" + menus +
+                ", menus=" +  (menus != null ? menus : "no menus")  +
                 '}';
     }
 
