@@ -17,8 +17,8 @@ public class RestaurantManagerApplication {
 		SpringApplication.run(RestaurantManagerApplication.class, args);
 	}
 
-/*
-	@Bean
+
+/*	@Bean
 	public ApplicationRunner dataLoader(CustomerDataLoader customerDataLoader, TableDataLoader tableDataLoader, MenuDataLoader menuDataLoader) {
 		return args -> {
 			customerDataLoader.createFakeCustomers();
@@ -26,6 +26,6 @@ public class RestaurantManagerApplication {
 			menuDataLoader.createFakeMenus();
 		};
 	}
-
 */
+
 }
