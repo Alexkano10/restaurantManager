@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -17,9 +18,7 @@ import java.util.List;
 public class MenuItem {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id; // UUID generado
+    private String id;
 
     private String name;
     private String description;
@@ -34,9 +33,45 @@ public class MenuItem {
     @JsonIgnore
     private List<MenuRestaurant> menus = new ArrayList<>();
 
-
     public boolean hasGluten() {
         return hasGluten;
     }
-}
 
+    // method para agregar un MenuRestaurant a un MenuItem
+    public void addMenu(MenuRestaurant menuRestaurant) {
+        this.getMenus().add(menuRestaurant);
+        if (!menuRestaurant.getMenuItems().contains(this)) {
+            menuRestaurant.getMenuItems().add(this);
+        }
+    }
+    @Override
+    public String toString() {
+        return "MenuItem{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", isSpicy=" + isSpicy +
+                ", hasGluten=" + hasGluten +
+                ", isAvailable=" + isAvailable +
+                ", courseType=" + courseType +
+                '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MenuItem)) return false;
+        MenuItem that = (MenuItem) o;
+        return isSpicy == that.isSpicy &&
+                hasGluten == that.hasGluten &&
+                isAvailable == that.isAvailable &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(description, that.description) &&
+                courseType == that.courseType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, isSpicy, hasGluten, isAvailable, courseType);
+    }
+}

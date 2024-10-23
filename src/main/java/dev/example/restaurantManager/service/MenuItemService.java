@@ -13,6 +13,6 @@ public interface MenuItemService {
     MenuItem updateMenuItem(String id, MenuItem menuItemDetails);
     boolean deleteMenuItem(String id);
     long countMenuItems();
-
+    List<MenuItem> getMenuItemsByMenuId(String menuId);
 
 }
