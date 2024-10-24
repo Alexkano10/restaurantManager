@@ -3,7 +3,6 @@ package dev.example.restaurantManager.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,30 +25,25 @@ public class OrderRestaurant {
     private boolean paid;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY
+            , cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "ORDER_MENU",
-            joinColumns = @JoinColumn(name = "ORDER_ID_FK"),
-            inverseJoinColumns = @JoinColumn(name = "MENU_ID_FK")
+            name = "ORDER_RESTAURANT_MENU",
+            joinColumns = @JoinColumn(name = "ORDER_RESTAURANT_FK_ID"),
+            inverseJoinColumns = @JoinColumn(name = "MENU_RESTAURANT_FK_ID")
     )
     private List<MenuRestaurant> menus = new ArrayList<>();
 
-    public void addMenu(MenuRestaurant menu) {
-        this.menus.add(menu);
-        menu.getOrders().add(this);
+    public List<MenuRestaurant> addMenu(MenuRestaurant menu) {
+            this.menus.add(menu);
+            menu.getOrders().add(this);
+        return this.menus;
     }
 
-    public void removeMenu(MenuRestaurant menu) {
-        this.menus.remove(menu);
-        menu.getOrders().remove(this);
-    }
-
-    public List<MenuRestaurant> getMenus() {
-        return menus;
-    }
-
-    public void setMenus(List<MenuRestaurant> menus) {
-        this.menus = menus;
+    public List<MenuRestaurant> removeMenu(MenuRestaurant menu) {
+            this.menus.remove(menu);
+            menu.getOrders().remove(this);
+        return this.menus;
     }
 
     @Override
@@ -62,7 +56,7 @@ public class OrderRestaurant {
                 ", totalPayment=" + totalPayment +
                 ", paid=" + paid +
                 ", menusCount=" + (menus != null ? menus.size() : 0) +
-                ", menus=" +  (menus != null ? menus : "no menus")  +
+                ", menus=" + menus +
                 '}';
     }
 
