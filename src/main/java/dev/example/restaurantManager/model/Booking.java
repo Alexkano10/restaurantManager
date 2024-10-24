@@ -38,8 +38,7 @@ public class Booking {
                 "shift: " + shift +"\n"  +
                 "bookingDate: " + bookingDate +"\n"  +
                 "peopleQty: " + peopleQty +"\n"  +
-                "date: " + date +"\n"  +
-                "table: " + tableRestaurantMapped  +"\n" +
+                "date: " + date +"\n"   +
                 "customer" + customerMapped
                 ;
     }

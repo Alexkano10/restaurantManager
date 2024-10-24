@@ -8,9 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Entity
 public class TableRestaurant {
@@ -23,19 +24,42 @@ public class TableRestaurant {
     private boolean busy;
 
     @OneToMany(mappedBy = "tableRestaurantMapped", cascade = CascadeType.ALL)
-    private ArrayList<Booking> bookings ;
+    private List<Booking> bookings;
 
-
-    // we must create a VERY CONCRETE constructor to RUN the OLD tests
-    public TableRestaurant(String name, String description , int qty,  boolean busy) {
+    //inicializar bookings en el constructor.
+    public TableRestaurant(String id, String name, String description, int qty, boolean busy, List<Booking> bookings) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.qty = qty;
+        this.busy = busy;
+        this.bookings = bookings != null ? bookings : new ArrayList<>();  // Inicializamos la lista con los valores pasados, si no son nulos
     }
 
 
     //method to add
+//    public void addBooking(Booking booking) {
+//        this.getBookings().add(booking);
+//        if (booking.getTableRestaurantMapped() != null)
+//            booking.getTableRestaurantMapped().getBookings().remove(booking);
+//        booking.setTableRestaurantMapped(this);
+//    }
+
+
     public void addBooking(Booking booking) {
+        if (booking.getTableRestaurantMapped() != null) {
+            List<Booking> bookings = booking.getTableRestaurantMapped().getBookings();
+            if(bookings!=null){
+                bookings.remove(booking);
+            }
+        }
+
+        if (this.getBookings() == null){
+            this.setBookings(new ArrayList<>());
+        }
         this.getBookings().add(booking);
-        if (booking.getTableRestaurantMapped() != null)
-            booking.getTableRestaurantMapped().getBookings().remove(booking);
+
+
         booking.setTableRestaurantMapped(this);
     }
 
@@ -47,6 +71,7 @@ public class TableRestaurant {
                 ", description='" + description + '\'' +
                 ", qty=" + qty +
                 ", busy=" + busy +
+                ", bookings=" + bookings +
                 '}';
     }
 
