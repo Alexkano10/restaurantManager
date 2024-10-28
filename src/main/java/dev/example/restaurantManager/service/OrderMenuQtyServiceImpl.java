@@ -41,8 +41,8 @@ public class OrderMenuQtyServiceImpl implements OrderMenuQtyService {
         OrderMenuQty orderMenuQty = orderMenuQtyRepository.findById(id).orElse(null);
         assert orderMenuQty != null;
         orderMenuQty.setQuantity(OrderMenuQtyDetails.getQuantity());
-        orderMenuQty.setOrder(OrderMenuQtyDetails.getOrder());
-        orderMenuQty.setMenu(OrderMenuQtyDetails.getMenu());
+        orderMenuQty.setOrderMapped(OrderMenuQtyDetails.getOrderMapped());
+        orderMenuQty.setMenuMapped(OrderMenuQtyDetails.getMenuMapped());
 
         return orderMenuQtyRepository.save(orderMenuQty);
 

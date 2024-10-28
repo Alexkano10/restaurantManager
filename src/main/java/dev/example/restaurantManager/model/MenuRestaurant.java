@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class MenuRestaurant {
@@ -34,8 +33,7 @@ public class MenuRestaurant {
     )
     private List<MenuItem> menuItems = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "menus", fetch = FetchType.LAZY)
-    private List<OrderRestaurant> orders = new ArrayList<>();
+
 
 
     public MenuRestaurant(String id, String name, Double price, String content, boolean active, boolean water, List<MenuItem> menuItems) {
@@ -47,6 +45,8 @@ public class MenuRestaurant {
         this.water = water;
         this.menuItems = menuItems != null ? new ArrayList<>(menuItems) : new ArrayList<>();
     }
+
+
 
     // Method para agregar un MenuItem a un MenuRestaurant
     public void addMenuItem(MenuItem menuItem) {
