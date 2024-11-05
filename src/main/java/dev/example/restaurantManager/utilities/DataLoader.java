@@ -96,7 +96,8 @@ public class DataLoader {
 
     // we are going to create 25 menu items
     // and save them in the H2 local database
-    private void createMenuItems() {
+        private void createMenuItems() {
+        /*
         for (int i = 0; i < 25; i++) {
             MenuItem menuItem = new MenuItem(
                     UUID.randomUUID().toString(),
@@ -106,6 +107,8 @@ public class DataLoader {
             );
             menuItemRepository.save(menuItem);
         }
+        */
+
     }
 
     // we are going to create 15 menus
