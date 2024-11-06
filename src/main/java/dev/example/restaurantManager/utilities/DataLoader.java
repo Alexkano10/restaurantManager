@@ -96,19 +96,50 @@ public class DataLoader {
 
     // we are going to create 25 menu items
     // and save them in the H2 local database
-        private void createMenuItems() {
-        /*
-        for (int i = 0; i < 25; i++) {
-            MenuItem menuItem = new MenuItem(
-                    UUID.randomUUID().toString(),
-                    faker.food().dish(),
-                    faker.food().ingredient() + " " + faker.food().ingredient() ,
-                    faker.number().randomDouble(2, 5, 30)
-            );
-            menuItemRepository.save(menuItem);
-        }
-        */
+    private void createMenuItems() {
 
+        // Listas predefinidas para los valores de sideDish, salad y dessert
+        List<String> sideDishes = Arrays.asList("Fries", "Rice", "Mashed Potatoes", "Grilled Vegetables", "Garlic Bread");
+        List<String> flavors = Arrays.asList("Chocolate", "Vanilla", "Strawberry", "Lemon", "Banana");
+        List<String> desserts = Arrays.asList("Chocolate Cake", "Ice Cream", "Apple Pie", "Cheesecake", "Tiramisu");
+
+        // Crear 25 elementos de menú de tipo MainCourse o Dessert
+        for (int i = 0; i < 25; i++) {
+
+            // Decidir aleatoriamente si el menú será un MainCourse o un Dessert
+            boolean isMainCourse = faker.random().nextBoolean();
+
+            if (isMainCourse) {
+                // Crear un MainCourse
+                MainCourse mainCourse = new MainCourse(
+                        UUID.randomUUID().toString(),
+                        faker.food().dish(),
+                        faker.food().ingredient() + " " + faker.food().ingredient(),
+                        faker.number().randomDouble(2, 5, 30),
+                        sideDishes.get(faker.random().nextInt(sideDishes.size())), // Selecciona un side dish aleatorio
+                        faker.number().numberBetween(200, 800), // Calorías
+                        faker.random().nextBoolean() // Chef Recommendation
+                );
+
+                // Guardar el MainCourse
+                menuItemRepository.save(mainCourse);
+
+            } else {
+                // Crear un Dessert
+                Dessert dessert = new Dessert(
+                        UUID.randomUUID().toString(),
+                        desserts.get(faker.random().nextInt(desserts.size())),
+                        faker.food().ingredient() + " " + faker.food().ingredient(),
+                        faker.number().randomDouble(2, 3, 15),
+                        faker.random().nextBoolean(), // Gluten Free
+                        flavors.get(faker.random().nextInt(flavors.size())), // Flavor
+                        faker.number().numberBetween(1, 10) // Sweetness Level
+                );
+
+                // Guardar el Dessert
+                menuItemRepository.save(dessert);
+            }
+        }
     }
 
     // we are going to create 15 menus
